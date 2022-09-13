@@ -4,12 +4,13 @@ Option Explicit On
 Option Infer On
 
 Public MustInherit Class Disease
-    Implements IFunction
+    'Implements IFunction
 
     'Attributes
     Private _Name As String     'Used to extract the name and insert into the grid
     Private _isVirus As Boolean
     Private _Year() As Year     'Composition
+    Private Const ARVCost As Double = 30
 
     'Constructor
     Public Sub New(period As Integer, name As String)
@@ -45,17 +46,51 @@ Public MustInherit Class Disease
         End Set
     End Property
 
+
+
     'General methods
-    Public MustOverride Function getFundraiser() As Boolean
 
-    Public MustOverride Function getFundraiser(num As Integer) As Boolean
 
-    Public Function InfectionIncDec() As Integer Implements IFunction.InfectionIncDec
+    Public Function ArrayLength() As Integer
+        Return _Year.Length() - 1
+    End Function
 
+
+    Public Function getFundraise(yr As Integer) As Double
+
+        Return getTreatmentNeeded(yr) * ARVCost
 
     End Function
 
-    Private Function IFunction_getFundraiser() As Boolean Implements IFunction.getFundraiser
-        Return True
+    Public Function getFundraise(yr As Integer, cost As Integer) As Double
+        Return getTreatmentNeeded(yr) * cost
     End Function
+
+    Public Function getTreatmentNeeded(yr As Integer) As Integer
+        Return ((Year(yr).Infections) - Year(yr).TreatmentReceived)
+    End Function
+
+    Public Function InfectionTrend(yr As Integer) As Integer
+        If yr = 1 Then
+            Return 0
+        Else
+            Dim Increase As Integer = (_Year(yr).Infections) - (_Year(yr - 1).Infections)
+            Return CInt(Increase / _Year(yr - 1).Infections * 100)
+        End If
+    End Function
+
+
+
+    'Public MustOverride Function getFundraiser() As Boolean
+
+    'Public MustOverride Function getFundraiser(num As Integer) As Boolean
+
+    'Public Function InfectionIncDec() As Integer Implements IFunction.InfectionIncDec
+
+
+    'End Function
+
+    'Private Function IFunction_getFundraiser() As Boolean Implements IFunction.getFundraiser
+    '    Return True
+    'End Function
 End Class

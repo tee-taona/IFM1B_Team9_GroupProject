@@ -7,7 +7,7 @@ Public Class Year
     Private _Year As String
     Private _Infections As Integer
     Private _NewInfections As Integer
-    Private _TreatmentRecieved As Integer
+    Private _TreatmentReceived As Integer
     Private _DeathCount As Integer
     Private _NumYears As Integer
 
@@ -29,7 +29,7 @@ Public Class Year
             Return _Year
         End Get
         Set(value As String)
-            _Year = Validate(value)
+            _Year = value
         End Set
     End Property
     Public Property Infections() As Integer
@@ -46,12 +46,12 @@ Public Class Year
             Return _NewInfections
         End Get
     End Property
-    Public Property Treatment() As Integer
+    Public Property TreatmentReceived() As Integer
         Get
-            Return _TreatmentRecieved
+            Return _TreatmentReceived
         End Get
         Set(value As Integer)
-            _TreatmentRecieved = Validate(value)
+            _TreatmentReceived = Validate(value)
         End Set
     End Property
     Public Property DeathCount() As Integer

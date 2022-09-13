@@ -6,6 +6,7 @@ Option Infer Off
 Public Class HIVAIDS
     Inherits Disease
 
+
     ''Attributes
     Private _ARVCost As Double
     Private _isInfectionReduced As Boolean
@@ -31,14 +32,16 @@ Public Class HIVAIDS
             _isInfectionReduced = value
         End Set
     End Property
+
+
     ''Methods
-    Public Overrides Function getFundraiser() As Boolean
+    'Public Overrides Function getFundraiser() As Boolean
 
-    End Function
+    'End Function
 
-    Public Overrides Function getFundraiser(num As Integer) As Boolean
+    'Public Overrides Function getFundraiser(num As Integer) As Boolean
 
-    End Function
+    'End Function
 
 
 End Class

@@ -19,10 +19,10 @@ Public Class frmDisease
         Dim objHiv As HIVAIDS
 
         For y As Integer = 1 To NumHIV 'Number of years for HIV
-            objHiv = New HIVAIDS(NumHIV, "HIV / AIDS", ARVCost)
+            objHiv = New HIVAIDS(NumHIV)
             objHiv.Year(y).Year = InputBox("Enter the year " & objHiv.Name & " is being monitored")
             objHiv.Year(y).Infections = CInt(InputBox("Enter the number of infections for " & objHiv.Name & " in " & objHiv.Year(y).Year))
-            objHiv.Year(y).Treatment = CInt(InputBox("Enter the number of Treatments given for " & objHiv.Name & " in " & objHiv.Year(y).Year))
+            objHiv.Year(y).TreatmentReceived = CInt(InputBox("Enter the number of Treatments given for " & objHiv.Name & " in " & objHiv.Year(y).Year))
 
             'Calculations
             'Determining whether there is a need for fundraising
@@ -32,12 +32,12 @@ Public Class frmDisease
     Private Sub CaptureC19()
         'A method for capturing the data of Covid 19
         Dim objC19 As Covid19
-
+        Dim Vaccost As Double = 9
         For y As Integer = 1 To NumHIV 'Number of years for Covid 19
-            objC19 = New Covid19(NumC19, "Covid", VaccineCost)
+            objC19 = New Covid19(NumC19, Vaccost)
             objC19.Year(y).Year = InputBox("Enter the year " & objC19.Name & " is being monitored")
             objC19.Year(y).Infections = CInt(InputBox("Enter the number of infections for " & objC19.Name & " in " & objC19.Year(y).Year))
-            objC19.Year(y).Treatment = CInt(InputBox("Enter the number of Treatments given for " & objC19.Name & " in " & objC19.Year(y).Year))
+            objC19.Year(y).TreatmentReceived = CInt(InputBox("Enter the number of Treatments given for " & objC19.Name & " in " & objC19.Year(y).Year))
 
             'Calculations
             'Determining whether there is a need for fundraising

@@ -10,11 +10,12 @@ Public MustInherit Class Disease
     Private _Name As String     'Used to extract the name and insert into the grid
     Private _isVirus As Boolean
     Private _Year() As Year     'Composition
-    Private Const ARVCost As Double = 30
+    Private Const _ARVCost As Double = 30
+    Private _VaccineCost As Double
 
     'Constructor
-    Public Sub New(period As Integer, name As String)
-        _Name = name
+    Public Sub New(period As Integer)
+
         ReDim _Year(period)
         For y As Integer = 1 To period
             _Year(y) = New Year()
@@ -22,7 +23,10 @@ Public MustInherit Class Disease
     End Sub
 
     'Property Methods
-    Public ReadOnly Property Name() As String
+    Public Property Name() As String
+        Set(value As String)
+            _Name = value
+        End Set
         Get
             Return _Name
         End Get
@@ -46,7 +50,14 @@ Public MustInherit Class Disease
         End Set
     End Property
 
-
+    Public Property VaccineCost As Double
+        Set(value As Double)
+            _VaccineCost = value
+        End Set
+        Get
+            Return _VaccineCost
+        End Get
+    End Property
 
     'General methods
 

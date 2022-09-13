@@ -34,13 +34,12 @@ Partial Class frmDisease
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.btnCapture = New System.Windows.Forms.Button()
         Me.lblDisplay = New System.Windows.Forms.Label()
-        Me.grdDisease = New UJGrid.UJGrid()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -157,11 +156,17 @@ Partial Class frmDisease
         Me.Panel2.Controls.Add(Me.Button3)
         Me.Panel2.Controls.Add(Me.btnCapture)
         Me.Panel2.Controls.Add(Me.lblDisplay)
-        Me.Panel2.Controls.Add(Me.grdDisease)
         Me.Panel2.Location = New System.Drawing.Point(23, 215)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(919, 306)
         Me.Panel2.TabIndex = 1
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(132, 242)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 17
         '
         'Label1
         '
@@ -207,23 +212,6 @@ Partial Class frmDisease
         Me.lblDisplay.Name = "lblDisplay"
         Me.lblDisplay.Size = New System.Drawing.Size(0, 13)
         Me.lblDisplay.TabIndex = 1
-        '
-        'grdDisease
-        '
-        Me.grdDisease.FixedCols = 1
-        Me.grdDisease.FixedRows = 1
-        Me.grdDisease.Location = New System.Drawing.Point(16, 27)
-        Me.grdDisease.Name = "grdDisease"
-        Me.grdDisease.Scrollbars = System.Windows.Forms.ScrollBars.Both
-        Me.grdDisease.Size = New System.Drawing.Size(720, 202)
-        Me.grdDisease.TabIndex = 0
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(132, 242)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 17
         '
         'frmDisease
         '

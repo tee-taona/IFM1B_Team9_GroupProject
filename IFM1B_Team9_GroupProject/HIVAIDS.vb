@@ -12,9 +12,8 @@ Public Class HIVAIDS
     Private _isInfectionReduced As Boolean
 
     ''Constructor
-    Public Sub New(period As Integer, Cost As Double)
+    Public Sub New(period As Integer)
         MyBase.New(period)
-        VaccineCost = Cost
     End Sub
 
     ''Property Methods

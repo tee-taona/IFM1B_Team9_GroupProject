@@ -151,45 +151,24 @@ Public Class frmDisease
     '#Display infomation for selected disease
     Private Sub CmbDisease_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbDisease.SelectedIndexChanged
         Dim position As Integer = CmbDisease.SelectedIndex + 1
-        If position = 1 Then
-            grdDisplay.Rows = objHIV.ArrayLength + 1
 
-            For yr As Integer = 1 To objHIV.ArrayLength
-                FillGrid(yr, 0, objHIV.Year(yr).Year)
+        grdDisplay.Rows = Disease(position).ArrayLength + 1
 
-                FillGrid(yr, 1, objHIV.Name)
-                FillGrid(yr, 2, CStr(Disease(1).isVirus))
-                FillGrid(yr, 3, CStr(Disease(1).Year(yr).Infections))
-                FillGrid(yr, 4, CStr(Disease(1).Year(yr).NewInfections))
-                FillGrid(yr, 5, CStr(Disease(1).Year(yr).TreatmentReceived))
-                FillGrid(yr, 6, CStr(Disease(1).Year(yr).DeathCount))
-                FillGrid(yr, 7, CStr(Disease(1).InfectionTrend(yr)) + "%")
-                FillGrid(yr, 8, CStr(Disease(1).DeathTrend(yr)) + "%")
-                FillGrid(yr, 9, "R" + CStr(Disease(1).getFundraise(yr)))
+        For yr As Integer = 1 To objHIV.ArrayLength
+            FillGrid(yr, 0, objHIV.Year(yr).Year)
 
-            Next yr
-        Else
+            FillGrid(yr, 1, objHIV.Name)
+            FillGrid(yr, 2, CStr(Disease(position).isVirus))
+            FillGrid(yr, 3, CStr(Disease(position).Year(yr).Infections))
+            FillGrid(yr, 4, CStr(Disease(position).Year(yr).NewInfections))
+            FillGrid(yr, 5, CStr(Disease(position).Year(yr).TreatmentReceived))
+            FillGrid(yr, 6, CStr(Disease(position).Year(yr).DeathCount))
+            FillGrid(yr, 7, CStr(Disease(position).InfectionTrend(yr)) + "%")
+            FillGrid(yr, 8, CStr(Disease(position).DeathTrend(yr)) + "%")
+            FillGrid(yr, 9, "R" + CStr(Disease(position).getFundraise(yr)))
 
-            grdDisplay.Rows = objCovid.ArrayLength + 1
-
-            For yr As Integer = 1 To objCovid.ArrayLength
-                FillGrid(yr, 0, objCovid.Year(yr).Year)
-
-                FillGrid(yr, 1, Disease(2).Name)
-                FillGrid(yr, 2, CStr(Disease(2).isVirus))
-                FillGrid(yr, 3, CStr(Disease(2).Year(yr).Infections))
-                FillGrid(yr, 4, CStr(Disease(2).Year(yr).NewInfections))
-                FillGrid(yr, 5, CStr(Disease(2).Year(yr).TreatmentReceived))
-                FillGrid(yr, 6, CStr(Disease(2).Year(yr).DeathCount))
-                FillGrid(yr, 7, CStr(Disease(2).InfectionTrend(yr)) + "%")
-                FillGrid(yr, 8, CStr(Disease(2).DeathTrend(yr)) + "%")
-                FillGrid(yr, 9, "R" + CStr(Disease(2).getFundraise(yr)))
-
-            Next yr
-        End If
-
+        Next yr
     End Sub
-
 
     '#Function
     Private Function CheckBool(value As Integer) As Boolean

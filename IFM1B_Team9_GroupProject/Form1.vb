@@ -11,6 +11,8 @@ Public Class frmDisease
     Private Disease(2) As Disease
     Private Const ARVcost As Double = 25
 
+    'example comment
+
 
     '#Form Load
     Private Sub frmDisease_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -65,6 +65,7 @@ Public Class frmDisease
 
     'Capturing information for HIV
     Private Sub btnHIVCapture_Click(sender As Object, e As EventArgs) Handles btnHIVCapture.Click
+        CmbDisease.Items.Remove(1)
         objHIV = New HIVAIDS(yearHIV)
 
         objHIV.Name = InputBox("What is the type of the HIV? " & vbNewLine & "HIV-1 or HIV-2")
@@ -99,6 +100,7 @@ Public Class frmDisease
 
     'Capturing information for Covid
     Private Sub btnCovidCapture_Click(sender As Object, e As EventArgs) Handles btnCovidCapture.Click
+        CmbDisease.Items.Remove(2)
         objCovid = New Covid19(yearCvd, VaccineCost)
         objCovid.Name = InputBox("What is the variant of this Covid? " & vbNewLine & "SARS-COV-2 or  Omicron")
         objCovid.isVirus = CheckBool(CInt(InputBox("Is it a virus?" & vbNewLine & "" & vbNewLine & "1 - Yes" & vbNewLine & "2 - No")))
@@ -126,12 +128,21 @@ Public Class frmDisease
         CmbDisease.Items.Add("Covid")
     End Sub
 
+    Private Sub btnReduced_Click(sender As Object, e As EventArgs) Handles btnReduced.Click
+        If CmbDisease.SelectedIndex + 1 = 1 Then
+            txtreduced.Text = CStr(objHIV.isReduced)
+        Else
+            txtreduced.Text = CStr(objCovid.isReduced)
+        End If
+
+    End Sub
+
+
 
 
     '#Display infomation for selected disease
     Private Sub CmbDisease_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbDisease.SelectedIndexChanged
         Dim position As Integer = CmbDisease.SelectedIndex + 1
-
         If position = 1 Then
             grdDisplay.Rows = objHIV.ArrayLength + 1
 
@@ -253,11 +264,11 @@ Public Class frmDisease
     'End Sub
 
 
-    '''VARIABLES
+    'VARIABLES
 
 
     ''********************************************************************************************************************************
-    '''CODE
+    'CODE
 
 
 

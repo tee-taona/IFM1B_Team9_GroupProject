@@ -23,7 +23,10 @@ Partial Class frmDisease
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.btnCovidCapture = New System.Windows.Forms.Button()
+        Me.btnHIVCapture = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -36,18 +39,17 @@ Partial Class frmDisease
         Me.txtCostHIV = New System.Windows.Forms.TextBox()
         Me.btnInitialise = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnHIVCapture = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnReduced = New System.Windows.Forms.Button()
         Me.CmbDisease = New System.Windows.Forms.ComboBox()
         Me.lblselect = New System.Windows.Forms.Label()
         Me.grdDisplay = New UJGrid.UJGrid()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtreduced = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.lblDisplay = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -56,26 +58,55 @@ Partial Class frmDisease
         'Panel1
         '
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.btnCovidCapture)
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.btnInitialise)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.btnHIVCapture)
-        Me.Panel1.Location = New System.Drawing.Point(157, 12)
+        Me.Panel1.Location = New System.Drawing.Point(50, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(639, 282)
+        Me.Panel1.Size = New System.Drawing.Size(844, 269)
         Me.Panel1.TabIndex = 0
+        '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label7)
+        Me.Panel3.Controls.Add(Me.btnCovidCapture)
+        Me.Panel3.Controls.Add(Me.btnHIVCapture)
+        Me.Panel3.Location = New System.Drawing.Point(78, 135)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(597, 100)
+        Me.Panel3.TabIndex = 2
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(15, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(118, 13)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "Capture Information"
         '
         'btnCovidCapture
         '
-        Me.btnCovidCapture.Location = New System.Drawing.Point(376, 160)
+        Me.btnCovidCapture.Location = New System.Drawing.Point(300, 16)
         Me.btnCovidCapture.Name = "btnCovidCapture"
-        Me.btnCovidCapture.Size = New System.Drawing.Size(236, 70)
+        Me.btnCovidCapture.Size = New System.Drawing.Size(287, 70)
         Me.btnCovidCapture.TabIndex = 19
-        Me.btnCovidCapture.Text = "Capture Covid 19 Information"
+        Me.btnCovidCapture.Text = "Enter Covid-19 Information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.btnCovidCapture.UseVisualStyleBackColor = True
+        '
+        'btnHIVCapture
+        '
+        Me.btnHIVCapture.Location = New System.Drawing.Point(7, 16)
+        Me.btnHIVCapture.Name = "btnHIVCapture"
+        Me.btnHIVCapture.Size = New System.Drawing.Size(287, 70)
+        Me.btnHIVCapture.TabIndex = 3
+        Me.btnHIVCapture.Text = "Enter HIV/AIDS Information."
+        Me.btnHIVCapture.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -83,7 +114,7 @@ Partial Class frmDisease
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.txtNumC19)
         Me.GroupBox2.Controls.Add(Me.txtCostC19)
-        Me.GroupBox2.Location = New System.Drawing.Point(8, 130)
+        Me.GroupBox2.Location = New System.Drawing.Point(357, 16)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(343, 113)
         Me.GroupBox2.TabIndex = 18
@@ -128,6 +159,7 @@ Partial Class frmDisease
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.txtNumHIV)
         Me.GroupBox1.Controls.Add(Me.txtCostHIV)
+        Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox1.Location = New System.Drawing.Point(8, 16)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(343, 113)
@@ -169,9 +201,9 @@ Partial Class frmDisease
         '
         'btnInitialise
         '
-        Me.btnInitialise.Location = New System.Drawing.Point(8, 248)
+        Me.btnInitialise.Location = New System.Drawing.Point(706, 16)
         Me.btnInitialise.Name = "btnInitialise"
-        Me.btnInitialise.Size = New System.Drawing.Size(343, 27)
+        Me.btnInitialise.Size = New System.Drawing.Size(131, 113)
         Me.btnInitialise.TabIndex = 12
         Me.btnInitialise.Text = "Initialise"
         Me.btnInitialise.UseVisualStyleBackColor = True
@@ -186,44 +218,35 @@ Partial Class frmDisease
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Initialise"
         '
-        'btnHIVCapture
-        '
-        Me.btnHIVCapture.Location = New System.Drawing.Point(376, 31)
-        Me.btnHIVCapture.Name = "btnHIVCapture"
-        Me.btnHIVCapture.Size = New System.Drawing.Size(236, 70)
-        Me.btnHIVCapture.TabIndex = 3
-        Me.btnHIVCapture.Text = "Capture HIV/AIDS Information"
-        Me.btnHIVCapture.UseVisualStyleBackColor = True
-        '
         'Panel2
         '
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.Button2)
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.btnReduced)
         Me.Panel2.Controls.Add(Me.CmbDisease)
         Me.Panel2.Controls.Add(Me.lblselect)
         Me.Panel2.Controls.Add(Me.grdDisplay)
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtreduced)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Button4)
-        Me.Panel2.Controls.Add(Me.Button3)
         Me.Panel2.Controls.Add(Me.lblDisplay)
         Me.Panel2.Location = New System.Drawing.Point(33, 300)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(919, 326)
         Me.Panel2.TabIndex = 1
         '
-        'Button2
+        'btnReduced
         '
-        Me.Button2.Location = New System.Drawing.Point(757, 211)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(145, 61)
-        Me.Button2.TabIndex = 21
-        Me.Button2.Text = "Is Infection Reduced?"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnReduced.Location = New System.Drawing.Point(757, 136)
+        Me.btnReduced.Name = "btnReduced"
+        Me.btnReduced.Size = New System.Drawing.Size(145, 75)
+        Me.btnReduced.TabIndex = 21
+        Me.btnReduced.Text = "Is Infection Reduced?"
+        Me.btnReduced.UseVisualStyleBackColor = True
         '
         'CmbDisease
         '
+        Me.CmbDisease.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbDisease.FormattingEnabled = True
         Me.CmbDisease.Location = New System.Drawing.Point(16, 27)
         Me.CmbDisease.Name = "CmbDisease"
@@ -249,12 +272,13 @@ Partial Class frmDisease
         Me.grdDisplay.Size = New System.Drawing.Size(735, 218)
         Me.grdDisplay.TabIndex = 18
         '
-        'TextBox1
+        'txtreduced
         '
-        Me.TextBox1.Location = New System.Drawing.Point(132, 278)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 17
+        Me.txtreduced.Location = New System.Drawing.Point(132, 278)
+        Me.txtreduced.Name = "txtreduced"
+        Me.txtreduced.ReadOnly = True
+        Me.txtreduced.Size = New System.Drawing.Size(100, 20)
+        Me.txtreduced.TabIndex = 17
         '
         'Label1
         '
@@ -267,21 +291,12 @@ Partial Class frmDisease
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(757, 129)
+        Me.Button4.Location = New System.Drawing.Point(757, 54)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(145, 76)
         Me.Button4.TabIndex = 5
         Me.Button4.Text = "Calculations"
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(757, 63)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(145, 60)
-        Me.Button3.TabIndex = 4
-        Me.Button3.Text = "Display Information"
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'lblDisplay
         '
@@ -304,6 +319,8 @@ Partial Class frmDisease
         Me.Text = "Millennium Development Goal 6 "
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -324,12 +341,11 @@ Partial Class frmDisease
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
     Friend WithEvents btnHIVCapture As Button
     Friend WithEvents txtCostC19 As TextBox
     Friend WithEvents txtCostHIV As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtreduced As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
@@ -338,6 +354,8 @@ Partial Class frmDisease
     Friend WithEvents CmbDisease As ComboBox
     Friend WithEvents lblselect As Label
     Friend WithEvents btnCovidCapture As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnReduced As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label7 As Label
 End Class

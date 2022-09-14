@@ -10,7 +10,6 @@ Public Class Year
     Private _TreatmentReceived As Integer
     Private _DeathCount As Integer
 
-
     'Utility Method
     Private Function Validate(value As Integer) As Integer
         Dim num As Integer

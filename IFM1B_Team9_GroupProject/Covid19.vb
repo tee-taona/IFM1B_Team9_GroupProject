@@ -8,9 +8,7 @@ Option Infer Off
 Public Class Covid19
     Inherits Disease
 
-
-    ''Attributes
-    'Private _Type As String
+    'Attributes
     Private _isDeathReduced As Boolean
 
     ''Constructor
@@ -18,12 +16,7 @@ Public Class Covid19
         MyBase.New(period)
         VaccineCost = Cost
     End Sub
-    'Public Sub New(period As Integer, name As String, Cost As Double)
-    '    MyBase.New(period, name)
-    '    _VaccineCost = Cost
-    'End Sub
 
-    ''Property Methods
     Public Property DeathReduced As Boolean
         Get
             Return _isDeathReduced
@@ -32,8 +25,6 @@ Public Class Covid19
             _isDeathReduced = value
         End Set
     End Property
-
-
 
     ''Methods
     Public Overrides Function isDeathReduced() As Boolean
@@ -63,7 +54,6 @@ Public Class Covid19
         Next y
         Return boolReduced
     End Function
-
 
     Public Overrides Function isInfectionReduced() As Boolean
 

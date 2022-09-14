@@ -107,15 +107,4 @@ Public MustInherit Class Disease
         Dim boolReduced As Boolean = True
         Return boolReduced
     End Function
-
-    'Public MustOverride Function getFundraiser() As Boolean
-
-    'Public MustOverride Function getFundraiser(num As Integer) As Boolean
-
-    'Public Function InfectionIncDec() As Integer Implements IFunction.InfectionIncDec
-    'End Function
-
-    'Private Function IFunction_getFundraiser() As Boolean Implements IFunction.getFundraiser
-    '    Return True
-    'End Function
 End Class

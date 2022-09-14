@@ -6,23 +6,13 @@ Option Infer Off
 Public Class HIVAIDS
     Inherits Disease
 
-
     ''Attributes
-    'Private _ARVCost As Double
     Private _isInfectionReduced As Boolean
 
     ''Constructor
     Public Sub New(period As Integer)
         MyBase.New(period)
     End Sub
-
-    ''Property Methods
-
-    'Public ReadOnly Property ARVCost() As Double
-    '    Get
-    '        Return _ARVCost
-    '    End Get
-    'End Property
 
     Public Property InfectionReduced As Boolean
         Get
@@ -32,7 +22,6 @@ Public Class HIVAIDS
             _isInfectionReduced = value
         End Set
     End Property
-
 
     ''Methods
     Public Overrides Function isDeathReduced() As Boolean
@@ -89,14 +78,4 @@ Public Class HIVAIDS
         Next y
         Return boolReduced
     End Function
-
-    'Public Overrides Function getFundraiser() As Boolean
-
-    'End Function
-
-    'Public Overrides Function getFundraiser(num As Integer) As Boolean
-
-    'End Function
-
-
 End Class

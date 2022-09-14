@@ -99,30 +99,15 @@ Public MustInherit Class Disease
         End If
     End Function
 
-    Public Function isReduced() As Boolean
+    Public Overridable Function isInfectionReduced() As Boolean
 
         Dim boolReduced As Boolean = True
-        Dim counter As Integer = 0
-        Dim Infections As Integer = InfectionTrend(1)
+        Return boolReduced
+    End Function
 
-        For y As Integer = 2 To ArrayLength()
-            'Increase in infections
-            If InfectionTrend(y) < Infections Then
-                counter += 1
-                Infections = InfectionTrend(y)
-                'Decrease in infections
-            Else
-                'Increase trend
-                counter -= 1
-            End If
+    Public Overridable Function isDeathReduced() As Boolean
 
-            '
-            If counter > 0 Then 'If counter > 0 then decreasing. If < 0 then increases.
-                boolReduced = True
-            Else
-                boolReduced = False
-            End If
-        Next y
+        Dim boolReduced As Boolean = True
         Return boolReduced
     End Function
 

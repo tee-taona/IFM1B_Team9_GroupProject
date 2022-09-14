@@ -130,9 +130,17 @@ Public Class frmDisease
 
     Private Sub btnReduced_Click(sender As Object, e As EventArgs) Handles btnReduced.Click
         If CmbDisease.SelectedIndex + 1 = 1 Then
-            txtreduced.Text = CStr(objHIV.isReduced)
+            If TypeOf Disease(1) Is HIVAIDS Then
+                Dim objHIVAIDS As HIVAIDS = DirectCast(Disease(1), HIVAIDS)
+                txtinfectreduced.Text = CStr(objHIVAIDS.isInfectionReduced)
+                txtdeathred.Text = CStr(objHIVAIDS.isDeathReduced)
+            End If
         Else
-            txtreduced.Text = CStr(objCovid.isReduced)
+            If TypeOf Disease(1) Is HIVAIDS Then
+                Dim objCovid19 As HIVAIDS = DirectCast(Disease(1), HIVAIDS)
+                txtinfectreduced.Text = CStr(objCovid19.isInfectionReduced)
+                txtdeathred.Text = CStr(objCovid19.isDeathReduced)
+            End If
         End If
 
     End Sub
@@ -150,14 +158,14 @@ Public Class frmDisease
                 FillGrid(yr, 0, objHIV.Year(yr).Year)
 
                 FillGrid(yr, 1, objHIV.Name)
-                FillGrid(yr, 2, CStr(objHIV.isVirus))
-                FillGrid(yr, 3, CStr(objHIV.Year(yr).Infections))
-                FillGrid(yr, 4, CStr(objHIV.Year(yr).NewInfections))
-                FillGrid(yr, 5, CStr(objHIV.Year(yr).TreatmentReceived))
-                FillGrid(yr, 6, CStr(objHIV.Year(yr).DeathCount))
-                FillGrid(yr, 7, CStr(objHIV.InfectionTrend(yr)) + "%")
-                FillGrid(yr, 8, CStr(objHIV.DeathTrend(yr)) + "%")
-                FillGrid(yr, 9, objHIV.getFundraise(yr).ToString("R" & "0.00"))
+                FillGrid(yr, 2, CStr(Disease(1).isVirus))
+                FillGrid(yr, 3, CStr(Disease(1).Year(yr).Infections))
+                FillGrid(yr, 4, CStr(Disease(1).Year(yr).NewInfections))
+                FillGrid(yr, 5, CStr(Disease(1).Year(yr).TreatmentReceived))
+                FillGrid(yr, 6, CStr(Disease(1).Year(yr).DeathCount))
+                FillGrid(yr, 7, CStr(Disease(1).InfectionTrend(yr)) + "%")
+                FillGrid(yr, 8, CStr(Disease(1).DeathTrend(yr)) + "%")
+                FillGrid(yr, 9, "R" + CStr(Disease(1).getFundraise(yr)))
 
             Next yr
         Else
@@ -167,15 +175,15 @@ Public Class frmDisease
             For yr As Integer = 1 To objCovid.ArrayLength
                 FillGrid(yr, 0, objCovid.Year(yr).Year)
 
-                FillGrid(yr, 1, objCovid.Name)
-                FillGrid(yr, 2, CStr(objCovid.isVirus))
-                FillGrid(yr, 3, CStr(objCovid.Year(yr).Infections))
-                FillGrid(yr, 4, CStr(objCovid.Year(yr).NewInfections))
-                FillGrid(yr, 5, CStr(objCovid.Year(yr).TreatmentReceived))
-                FillGrid(yr, 6, CStr(objCovid.Year(yr).DeathCount))
-                FillGrid(yr, 7, CStr(objCovid.InfectionTrend(yr)) + "%")
-                FillGrid(yr, 8, CStr(objCovid.DeathTrend(yr)) + "%")
-                FillGrid(yr, 9, objCovid.getFundraise(yr).ToString("R" & "0.00"))
+                FillGrid(yr, 1, Disease(2).Name)
+                FillGrid(yr, 2, CStr(Disease(2).isVirus))
+                FillGrid(yr, 3, CStr(Disease(2).Year(yr).Infections))
+                FillGrid(yr, 4, CStr(Disease(2).Year(yr).NewInfections))
+                FillGrid(yr, 5, CStr(Disease(2).Year(yr).TreatmentReceived))
+                FillGrid(yr, 6, CStr(Disease(2).Year(yr).DeathCount))
+                FillGrid(yr, 7, CStr(Disease(2).InfectionTrend(yr)) + "%")
+                FillGrid(yr, 8, CStr(Disease(2).DeathTrend(yr)) + "%")
+                FillGrid(yr, 9, "R" + CStr(Disease(2).getFundraise(yr)))
 
             Next yr
         End If

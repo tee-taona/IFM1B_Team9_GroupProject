@@ -44,10 +44,12 @@ Partial Class frmDisease
         Me.CmbDisease = New System.Windows.Forms.ComboBox()
         Me.lblselect = New System.Windows.Forms.Label()
         Me.grdDisplay = New UJGrid.UJGrid()
-        Me.txtreduced = New System.Windows.Forms.TextBox()
+        Me.txtinfectreduced = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.lblDisplay = New System.Windows.Forms.Label()
+        Me.txtdeathred = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -222,17 +224,19 @@ Partial Class frmDisease
         '
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtdeathred)
+        Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.btnReduced)
         Me.Panel2.Controls.Add(Me.CmbDisease)
         Me.Panel2.Controls.Add(Me.lblselect)
         Me.Panel2.Controls.Add(Me.grdDisplay)
-        Me.Panel2.Controls.Add(Me.txtreduced)
+        Me.Panel2.Controls.Add(Me.txtinfectreduced)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Button4)
         Me.Panel2.Controls.Add(Me.lblDisplay)
         Me.Panel2.Location = New System.Drawing.Point(33, 300)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(919, 326)
+        Me.Panel2.Size = New System.Drawing.Size(919, 338)
         Me.Panel2.TabIndex = 1
         '
         'btnReduced
@@ -272,13 +276,13 @@ Partial Class frmDisease
         Me.grdDisplay.Size = New System.Drawing.Size(735, 218)
         Me.grdDisplay.TabIndex = 18
         '
-        'txtreduced
+        'txtinfectreduced
         '
-        Me.txtreduced.Location = New System.Drawing.Point(132, 278)
-        Me.txtreduced.Name = "txtreduced"
-        Me.txtreduced.ReadOnly = True
-        Me.txtreduced.Size = New System.Drawing.Size(100, 20)
-        Me.txtreduced.TabIndex = 17
+        Me.txtinfectreduced.Location = New System.Drawing.Point(132, 278)
+        Me.txtinfectreduced.Name = "txtinfectreduced"
+        Me.txtinfectreduced.ReadOnly = True
+        Me.txtinfectreduced.Size = New System.Drawing.Size(100, 20)
+        Me.txtinfectreduced.TabIndex = 17
         '
         'Label1
         '
@@ -306,6 +310,23 @@ Partial Class frmDisease
         Me.lblDisplay.Name = "lblDisplay"
         Me.lblDisplay.Size = New System.Drawing.Size(0, 13)
         Me.lblDisplay.TabIndex = 1
+        '
+        'txtdeathred
+        '
+        Me.txtdeathred.Location = New System.Drawing.Point(132, 301)
+        Me.txtdeathred.Name = "txtdeathred"
+        Me.txtdeathred.ReadOnly = True
+        Me.txtdeathred.Size = New System.Drawing.Size(100, 20)
+        Me.txtdeathred.TabIndex = 23
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(16, 304)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(100, 13)
+        Me.Label8.TabIndex = 22
+        Me.Label8.Text = "Is Death Reduced?"
         '
         'frmDisease
         '
@@ -345,7 +366,7 @@ Partial Class frmDisease
     Friend WithEvents txtCostC19 As TextBox
     Friend WithEvents txtCostHIV As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents txtreduced As TextBox
+    Friend WithEvents txtinfectreduced As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
@@ -358,4 +379,6 @@ Partial Class frmDisease
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label7 As Label
+    Friend WithEvents txtdeathred As TextBox
+    Friend WithEvents Label8 As Label
 End Class

@@ -4,115 +4,263 @@ Option Explicit On
 Option Infer Off
 'Edit Test
 Public Class frmDisease
-    ''METHODS
 
+    Private yearHIV, yearCvd, VaccineCost As Integer
+    Private objHIV As HIVAIDS
+    Private objCovid As Covid19
+    Private Disease(2) As Disease
+    Private Const ARVcost As Double = 25
+
+
+    '#Form Load
+    Private Sub frmDisease_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtCostHIV.Text = CStr(ARVcost)
+        txtCostHIV.ReadOnly = True
+        'Panel2.Visible = False
+
+        grdDisplay.Rows = 2
+
+        FillGrid(0, 0, "Year")
+        FillGrid(1, 0, "200...")
+
+        grdDisplay.Cols = 10
+        FillGrid(0, 1, "Type")
+        FillGrid(0, 2, "Virus?")
+        FillGrid(0, 3, "Infections")
+        FillGrid(0, 4, "New Infections")
+        FillGrid(0, 5, "People Treated")
+        FillGrid(0, 6, "Death Count")
+        FillGrid(0, 7, "Infection % Change")
+        FillGrid(0, 8, "Death % Change")
+        FillGrid(0, 9, "Fundraise")
+
+
+        'BtnCovidCalc.Enabled = False
+        'BtnHIVCalc.Enabled = False
+    End Sub
+
+
+    '#Display Subroutine
     Private Sub FillGrid(ByVal r As Integer, ByVal c As Integer, ByVal t As String)
         'A subroutine that displays the information into the grid
-        grdDisease.Row = r
-        grdDisease.Col = c
-        grdDisease.Text = t
-    End Sub
-
-    Private Sub CaptureHIV()
-        'A method for capturing the data of HIV
-
-        Dim objHiv As HIVAIDS
-
-        For y As Integer = 1 To NumHIV 'Number of years for HIV
-            objHiv = New HIVAIDS(NumHIV)
-            objHiv.Year(y).Year = InputBox("Enter the year " & objHiv.Name & " is being monitored")
-            objHiv.Year(y).Infections = CInt(InputBox("Enter the number of infections for " & objHiv.Name & " in " & objHiv.Year(y).Year))
-            objHiv.Year(y).TreatmentReceived = CInt(InputBox("Enter the number of Treatments given for " & objHiv.Name & " in " & objHiv.Year(y).Year))
-
-            'Calculations
-            'Determining whether there is a need for fundraising
-        Next
-    End Sub
-
-    Private Sub CaptureC19()
-        'A method for capturing the data of Covid 19
-        Dim objC19 As Covid19
-        Dim Vaccost As Double = 9
-        For y As Integer = 1 To NumHIV 'Number of years for Covid 19
-            objC19 = New Covid19(NumC19, Vaccost)
-            objC19.Year(y).Year = InputBox("Enter the year " & objC19.Name & " is being monitored")
-            objC19.Year(y).Infections = CInt(InputBox("Enter the number of infections for " & objC19.Name & " in " & objC19.Year(y).Year))
-            objC19.Year(y).TreatmentReceived = CInt(InputBox("Enter the number of Treatments given for " & objC19.Name & " in " & objC19.Year(y).Year))
-
-            'Calculations
-            'Determining whether there is a need for fundraising
-        Next
-    End Sub
-
-    Private Sub DisplayHIV()
-        'A subroutine for display the information of HIV
-        lblDisplay.Text = "HIV / AIDS information"
-        Dim objHiv As HIVAIDS
-
-        'Initialising the grid
-        FillGrid(0, 0, "Year")
-        FillGrid(0, 1, "Number of Infections")
-        FillGrid(0, 2, "People Treated")
-        FillGrid(0, 3, "Death Count")
-        FillGrid(0, 4, "Fundraise Amount")
-
-
-        'Filling the information into the grid
-        For r As Integer = 1 To NumHIV
-
-        Next
-
-    End Sub
-
-    Private Sub DisplayC19()
-        'A subroutine to display the information of the C19
-        lblDisplay.Text = "Covid 19 information"
-        Dim objC19 As Covid19
-
-        'Initialising the grid
-
-
-
-        'Filling the information into the grid
-    End Sub
-
-    Private Sub DisplayGeneral()
-        'A subroutine for displaying the general information regarding the diseases
-        lblDisplay.Text = "General Information"
+        grdDisplay.Row = r
+        grdDisplay.Col = c
+        grdDisplay.Text = t
     End Sub
 
 
-    ''VARIABLES
-    Private NumHIV, NumC19, ARVCost, VaccineCost, choice As Integer
-    Private objDisease(2) As Disease
 
-
-    '********************************************************************************************************************************
-    ''CODE
+    '#Intialises the program
     Private Sub btnInitialise_Click(sender As Object, e As EventArgs) Handles btnInitialise.Click
         'Capturing the sizes of each class and array
-        NumHIV = CInt(txtNumHIV.Text)
-        NumC19 = CInt(txtNumC19.Text)
-        ARVCost = CInt(txtCostHIV.Text)
+        yearHIV = CInt(txtNumHIV.Text)
+        yearCvd = CInt(txtNumC19.Text)
         VaccineCost = CInt(txtCostC19.Text)
         'resizing and initialising the grid and array
 
-        Panel1.Enabled = False
-        Panel2.Visible = True
+        'Panel1.Enabled = False
+        ' Panel2.Visible = True
 
+    End Sub
+
+    'Capturing information for HIV
+    Private Sub btnHIVCapture_Click(sender As Object, e As EventArgs) Handles btnHIVCapture.Click
+        objHIV = New HIVAIDS(yearHIV)
+
+        objHIV.Name = InputBox("What is the type of the HIV? " & vbNewLine & "HIV-1 or HIV-2")
+        objHIV.isVirus = CheckBool(CInt(InputBox("Is it a virus?" & vbNewLine & "" & vbNewLine & "1 - Yes" & vbNewLine & "2 - No")))
+
+        For yr As Integer = 1 To yearHIV
+            objHIV.Year(yr) = New Year()
+            objHIV.Year(yr).Year = InputBox("What is the year?" & vbNewLine & "e.g 2000")
+
+            If yr = 1 Then
+                objHIV.Year(yr).Infections = CInt(InputBox("How many infections for the year " & objHIV.Year(yr).Year))
+                objHIV.Year(yr).TreatmentReceived = CInt(InputBox("How many have received treament for the year " & objHIV.Year(yr).Year))
+                objHIV.Year(yr).DeathCount = CInt(InputBox("How many have died in the current year due to the disease"))
+            End If
+
+            If yr > 1 Then
+                objHIV.Year(yr).NewInfections = CInt(InputBox("How many new infections for the year " & objHIV.Year(yr).Year))
+                objHIV.Year(yr).Infections = objHIV.Year(yr - 1).Infections + objHIV.Year(yr).NewInfections
+                objHIV.Year(yr).TreatmentReceived = objHIV.Year(yr - 1).TreatmentReceived + CInt(InputBox("How many have received treament for the year " & objHIV.Year(yr).Year))
+                objHIV.Year(yr).DeathCount = objHIV.Year(yr - 1).DeathCount + CInt(InputBox("How many have died in the current year due to the disease"))
+            End If
+
+        Next yr
+
+        Disease(1) = objHIV
+
+        CmbDisease.Items.Add("HIV")
 
 
     End Sub
 
-    Private Sub btnCapture_Click(sender As Object, e As EventArgs) Handles btnCapture.Click
-        'Capturing information for each disease
 
+    'Capturing information for Covid
+    Private Sub btnCovidCapture_Click(sender As Object, e As EventArgs) Handles btnCovidCapture.Click
+        objCovid = New Covid19(yearCvd, VaccineCost)
+        objCovid.Name = InputBox("What is the variant of this Covid? " & vbNewLine & "SARS-COV-2 or  Omicron")
+        objCovid.isVirus = CheckBool(CInt(InputBox("Is it a virus?" & vbNewLine & "" & vbNewLine & "1 - Yes" & vbNewLine & "2 - No")))
+
+        For yr As Integer = 1 To yearCvd
+            objCovid.Year(yr) = New Year()
+            objCovid.Year(yr).Year = InputBox("What is the year?" & vbNewLine & "e.g 2000")
+
+            If yr = 1 Then
+                objCovid.Year(yr).Infections = CInt(InputBox("How many infections for the year " & objCovid.Year(yr).Year))
+                objCovid.Year(yr).TreatmentReceived = CInt(InputBox("How many have received treament for the year " & objCovid.Year(yr).Year))
+                objCovid.Year(yr).DeathCount = CInt(InputBox("How many have died in the current year due to the disease"))
+            End If
+
+            If yr > 1 Then
+                objCovid.Year(yr).NewInfections = CInt(InputBox("How many new infections for the year " & objCovid.Year(yr).Year))
+                objCovid.Year(yr).Infections += objCovid.Year(yr).NewInfections
+                objCovid.Year(yr).TreatmentReceived = objCovid.Year(yr - 1).TreatmentReceived + CInt(InputBox("How many have received treament for the year " & objCovid.Year(yr).Year))
+                objCovid.Year(yr).DeathCount = objCovid.Year(yr - 1).DeathCount + CInt(InputBox("How many have died in the current year due to the disease"))
+            End If
+        Next yr
+
+        Disease(2) = objCovid
+
+        CmbDisease.Items.Add("Covid")
+    End Sub
+
+
+
+    '#Display infomation for selected disease
+    Private Sub CmbDisease_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbDisease.SelectedIndexChanged
+        Dim position As Integer = CmbDisease.SelectedIndex + 1
+
+        If position = 1 Then
+            grdDisplay.Rows = objHIV.ArrayLength + 1
+
+            For yr As Integer = 1 To objHIV.ArrayLength
+                FillGrid(yr, 0, objHIV.Year(yr).Year)
+
+                FillGrid(yr, 1, objHIV.Name)
+                FillGrid(yr, 2, CStr(objHIV.isVirus))
+                FillGrid(yr, 3, CStr(objHIV.Year(yr).Infections))
+                FillGrid(yr, 4, CStr(objHIV.Year(yr).NewInfections))
+                FillGrid(yr, 5, CStr(objHIV.Year(yr).TreatmentReceived))
+                FillGrid(yr, 6, CStr(objHIV.Year(yr).DeathCount))
+                FillGrid(yr, 7, CStr(objHIV.InfectionTrend(yr)) + "%")
+                FillGrid(yr, 8, CStr(objHIV.DeathTrend(yr)) + "%")
+                FillGrid(yr, 9, objHIV.getFundraise(yr).ToString("R" & "0.00"))
+
+            Next yr
+        Else
+
+            grdDisplay.Rows = objCovid.ArrayLength + 1
+
+            For yr As Integer = 1 To objCovid.ArrayLength
+                FillGrid(yr, 0, objCovid.Year(yr).Year)
+
+                FillGrid(yr, 1, objCovid.Name)
+                FillGrid(yr, 2, CStr(objCovid.isVirus))
+                FillGrid(yr, 3, CStr(objCovid.Year(yr).Infections))
+                FillGrid(yr, 4, CStr(objCovid.Year(yr).NewInfections))
+                FillGrid(yr, 5, CStr(objCovid.Year(yr).TreatmentReceived))
+                FillGrid(yr, 6, CStr(objCovid.Year(yr).DeathCount))
+                FillGrid(yr, 7, CStr(objCovid.InfectionTrend(yr)) + "%")
+                FillGrid(yr, 8, CStr(objCovid.DeathTrend(yr)) + "%")
+                FillGrid(yr, 9, objCovid.getFundraise(yr).ToString("R" & "0.00"))
+
+            Next yr
+        End If
 
     End Sub
 
 
-    Private Sub frmDisease_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Panel2.Visible = False
-    End Sub
+    '#Function
+    Private Function CheckBool(value As Integer) As Boolean
+        If value = 1 Then Return True Else Return False
+    End Function
+
+
+
+
+
+
+    'Private Sub CaptureHIV()
+    '    'A method for capturing the data of HIV
+
+    '    Dim objHiv As HIVAIDS
+
+    '    For y As Integer = 1 To NumHIV 'Number of years for HIV
+    '        objHiv = New HIVAIDS(NumHIV)
+    '        objHiv.Year(y).Year = InputBox("Enter the year " & objHiv.Name & " is being monitored")
+    '        objHiv.Year(y).Infections = CInt(InputBox("Enter the number of infections for " & objHiv.Name & " in " & objHiv.Year(y).Year))
+    '        objHiv.Year(y).TreatmentReceived = CInt(InputBox("Enter the number of Treatments given for " & objHiv.Name & " in " & objHiv.Year(y).Year))
+
+    '        'Calculations
+    '        'Determining whether there is a need for fundraising
+    '    Next
+    'End Sub
+
+
+
+    'Private Sub CaptureC19()
+    '    'A method for capturing the data of Covid 19
+    '    Dim objC19 As Covid19
+    '    Dim Vaccost As Double = 9
+    '    For y As Integer = 1 To NumHIV 'Number of years for Covid 19
+    '        objC19 = New Covid19(NumC19, Vaccost)
+    '        objC19.Year(y).Year = InputBox("Enter the year " & objC19.Name & " is being monitored")
+    '        objC19.Year(y).Infections = CInt(InputBox("Enter the number of infections for " & objC19.Name & " in " & objC19.Year(y).Year))
+    '        objC19.Year(y).TreatmentReceived = CInt(InputBox("Enter the number of Treatments given for " & objC19.Name & " in " & objC19.Year(y).Year))
+
+    '        'Calculations
+    '        'Determining whether there is a need for fundraising
+    '    Next
+    'End Sub
+
+    'Private Sub DisplayHIV()
+    '    'A subroutine for display the information of HIV
+    '    lblDisplay.Text = "HIV / AIDS information"
+    '    Dim objHiv As HIVAIDS
+
+    '    'Initialising the grid
+    '    FillGrid(0, 0, "Year")
+    '    FillGrid(0, 1, "Number of Infections")
+    '    FillGrid(0, 2, "People Treated")
+    '    FillGrid(0, 3, "Death Count")
+    '    FillGrid(0, 4, "Fundraise Amount")
+
+
+    '    'Filling the information into the grid
+    '    For r As Integer = 1 To NumHIV
+
+    '    Next
+
+    'End Sub
+
+    'Private Sub DisplayC19()
+    '    'A subroutine to display the information of the C19
+    '    lblDisplay.Text = "Covid 19 information"
+    '    Dim objC19 As Covid19
+
+    '    'Initialising the grid
+
+
+
+    '    'Filling the information into the grid
+    'End Sub
+
+    'Private Sub DisplayGeneral()
+    '    'A subroutine for displaying the general information regarding the diseases
+    '    lblDisplay.Text = "General Information"
+    'End Sub
+
+
+    '''VARIABLES
+
+
+    ''********************************************************************************************************************************
+    '''CODE
+
+
+
+
 
 End Class

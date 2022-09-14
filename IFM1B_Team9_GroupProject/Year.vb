@@ -41,7 +41,10 @@ Public Class Year
             _Infections = Validate(value)
         End Set
     End Property
-    Public ReadOnly Property NewInfections() As Integer
+    Public Property NewInfections As Integer
+        Set(value As Integer)
+            _NewInfections = value
+        End Set
         Get
             Return _NewInfections
         End Get

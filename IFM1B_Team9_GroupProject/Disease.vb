@@ -81,6 +81,15 @@ Public MustInherit Class Disease
         Return ((Year(yr).Infections) - Year(yr).TreatmentReceived)
     End Function
 
+    Public Function DeathTrend(yr As Integer) As Integer
+        If yr = 1 Then
+            Return 0
+        Else
+            Dim Increase As Integer = (_Year(yr).DeathCount) - (_Year(yr - 1).DeathCount)
+            Return CInt(Increase / _Year(yr - 1).DeathCount * 100)
+        End If
+    End Function
+
     Public Function InfectionTrend(yr As Integer) As Integer
         If yr = 1 Then
             Return 0

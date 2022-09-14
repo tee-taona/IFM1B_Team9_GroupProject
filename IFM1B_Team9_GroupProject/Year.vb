@@ -9,7 +9,6 @@ Public Class Year
     Private _NewInfections As Integer
     Private _TreatmentReceived As Integer
     Private _DeathCount As Integer
-    Private _NumYears As Integer
 
 
     'Utility Method
@@ -66,21 +65,13 @@ Public Class Year
         End Set
     End Property
 
-    Public Property NumYears() As Integer
-        Get
-            Return _NumYears
-        End Get
-        Set(value As Integer)
-            _NumYears = Validate(value)
-        End Set
-    End Property
     'Trend Methods
-    Public Function DeathTrend(Deaths As Integer) As Integer 'ie running through the deaths of year array in the form
+    Public Function DeathTrend(Deaths As Integer, NumYears As Integer) As Integer 'ie running through the deaths of year array in the form
         Dim Increasing As Boolean = True
         Dim Counter As Integer = 0
         Dim NumDeaths As Integer
 
-        For y As Integer = 2 To _NumYears
+        For y As Integer = 2 To NumYears
             'Increase in deaths
             If NumDeaths < Deaths Then
                 Counter += 1
@@ -99,19 +90,11 @@ Public Class Year
         Next y
         Return CInt(Increasing)
     End Function
-    Public Function InfectionTrend(Infections As Integer) As Integer 'ie running through the infections of year array in the form
+    Public Function InfectionTrend(Infections As Integer, NumYears As Integer) As Integer 'ie running through the infections of year array in the form
 
         'Infection Increase / Decrease
         'If positive % then increase
         'If negative % then decrease
-
-
-
-
-
-
-
-
 
         Dim Increasing As Boolean = True
         Dim counter As Integer = 0

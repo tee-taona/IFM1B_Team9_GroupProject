@@ -60,12 +60,9 @@ Public MustInherit Class Disease
     End Property
 
     'General methods
-
-
     Public Function ArrayLength() As Integer
         Return _Year.Length() - 1
     End Function
-
 
     Public Function getFundraise(yr As Integer) As Double
 
@@ -116,8 +113,6 @@ Public MustInherit Class Disease
     'Public MustOverride Function getFundraiser(num As Integer) As Boolean
 
     'Public Function InfectionIncDec() As Integer Implements IFunction.InfectionIncDec
-
-
     'End Function
 
     'Private Function IFunction_getFundraiser() As Boolean Implements IFunction.getFundraiser

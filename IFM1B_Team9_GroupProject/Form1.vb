@@ -36,9 +36,8 @@ Public Class frmDisease
         FillGrid(0, 8, "Death % Change")
         FillGrid(0, 9, "Fundraise")
 
-
-        'BtnCovidCalc.Enabled = False
-        'BtnHIVCalc.Enabled = False
+        btnCovidCapture.Enabled = False
+        btnHIVCapture.Enabled = False
     End Sub
 
 
@@ -48,6 +47,7 @@ Public Class frmDisease
         grdDisplay.Row = r
         grdDisplay.Col = c
         grdDisplay.Text = t
+
     End Sub
 
 
@@ -62,12 +62,13 @@ Public Class frmDisease
 
         'Panel1.Enabled = False
         ' Panel2.Visible = True
-
+        MsgBox("Intialisation Complete!")
+        btnHIVCapture.Enabled = True
     End Sub
 
     'Capturing information for HIV
     Private Sub btnHIVCapture_Click(sender As Object, e As EventArgs) Handles btnHIVCapture.Click
-        CmbDisease.Items.Remove(1)
+
         objHIV = New HIVAIDS(yearHIV)
 
         objHIV.Name = InputBox("What is the type of the HIV? " & vbNewLine & "HIV-1 or HIV-2")
@@ -92,17 +93,28 @@ Public Class frmDisease
 
         Next yr
 
-        Disease(1) = objHIV
+        If TypeOf Disease(1) Is Covid19 Then
+            Disease(2) = objHIV
+        Else
+            Disease(1) = objHIV
+        End If
+
 
         CmbDisease.Items.Add("HIV")
 
-
+        btnCovidCapture.Enabled = True
+        btnHIVCapture.Enabled = False
     End Sub
 
 
     'Capturing information for Covid
     Private Sub btnCovidCapture_Click(sender As Object, e As EventArgs) Handles btnCovidCapture.Click
-        CmbDisease.Items.Remove(2)
+        If CmbDisease.GetItemText(2) = "Covid-19" Then
+            CmbDisease.Items.Remove(2)
+        Else
+            CmbDisease.Items.Remove(1)
+        End If
+
         objCovid = New Covid19(yearCvd, VaccineCost)
         objCovid.Name = InputBox("What is the variant of this Covid? " & vbNewLine & "SARS-COV-2 or  Omicron")
         objCovid.isVirus = CheckBool(CInt(InputBox("Is it a virus?" & vbNewLine & "" & vbNewLine & "1 - Yes" & vbNewLine & "2 - No")))
@@ -119,27 +131,34 @@ Public Class frmDisease
 
             If yr > 1 Then
                 objCovid.Year(yr).NewInfections = CInt(InputBox("How many new infections for the year " & objCovid.Year(yr).Year))
-                objCovid.Year(yr).Infections += objCovid.Year(yr).NewInfections
+                objCovid.Year(yr).Infections += objCovid.Year(yr - 1).Infections + objCovid.Year(yr).NewInfections
                 objCovid.Year(yr).TreatmentReceived = objCovid.Year(yr - 1).TreatmentReceived + CInt(InputBox("How many have received treament for the year " & objCovid.Year(yr).Year))
                 objCovid.Year(yr).DeathCount = objCovid.Year(yr - 1).DeathCount + CInt(InputBox("How many have died in the current year due to the disease"))
             End If
         Next yr
 
-        Disease(2) = objCovid
+        If TypeOf Disease(1) Is HIVAIDS Then
+            Disease(2) = objCovid
+        Else
+            Disease(1) = objCovid
+        End If
 
-        CmbDisease.Items.Add("Covid")
+
+        CmbDisease.Items.Add("Covid-19")
+        btnCovidCapture.Enabled = False
     End Sub
 
     Private Sub btnReduced_Click(sender As Object, e As EventArgs) Handles btnReduced.Click
-        If CmbDisease.SelectedIndex + 1 = 1 Then
-            If TypeOf Disease(1) Is HIVAIDS Then
-                Dim objHIVAIDS As HIVAIDS = DirectCast(Disease(1), HIVAIDS)
-                txtinfectreduced.Text = CStr(objHIVAIDS.isInfectionReduced)
-                txtdeathred.Text = CStr(objHIVAIDS.isDeathReduced)
-            End If
+        Dim position As Integer = CmbDisease.SelectedIndex + 1
+
+        If TypeOf Disease(position) Is HIVAIDS Then
+            Dim objHIVAIDS As HIVAIDS = DirectCast(Disease(position), HIVAIDS)
+            txtinfectreduced.Text = CStr(objHIVAIDS.isInfectionReduced)
+            txtdeathred.Text = CStr(objHIVAIDS.isDeathReduced)
         Else
-            If TypeOf Disease(1) Is HIVAIDS Then
-                Dim objCovid19 As HIVAIDS = DirectCast(Disease(1), HIVAIDS)
+
+            If TypeOf Disease(position) Is Covid19 Then
+                Dim objCovid19 As Covid19 = DirectCast(Disease(position), Covid19)
                 txtinfectreduced.Text = CStr(objCovid19.isInfectionReduced)
                 txtdeathred.Text = CStr(objCovid19.isDeathReduced)
             End If
@@ -156,10 +175,10 @@ Public Class frmDisease
 
         grdDisplay.Rows = Disease(position).ArrayLength + 1
 
-        For yr As Integer = 1 To objHIV.ArrayLength
-            FillGrid(yr, 0, objHIV.Year(yr).Year)
+        For yr As Integer = 1 To Disease(position).ArrayLength
+            FillGrid(yr, 0, Disease(position).Year(yr).Year)
 
-            FillGrid(yr, 1, objHIV.Name)
+            FillGrid(yr, 1, Disease(position).Name)
             FillGrid(yr, 2, CStr(Disease(position).isVirus))
             FillGrid(yr, 3, CStr(Disease(position).Year(yr).Infections))
             FillGrid(yr, 4, CStr(Disease(position).Year(yr).NewInfections))
@@ -167,7 +186,13 @@ Public Class frmDisease
             FillGrid(yr, 6, CStr(Disease(position).Year(yr).DeathCount))
             FillGrid(yr, 7, CStr(Disease(position).InfectionTrend(yr)) + "%")
             FillGrid(yr, 8, CStr(Disease(position).DeathTrend(yr)) + "%")
-            FillGrid(yr, 9, "R" + CStr(Disease(position).getFundraise(yr)))
+
+            If TypeOf Disease(position) Is HIVAIDS Then
+                FillGrid(yr, 9, "R" + CStr(Disease(position).getFundraise(yr)))
+            ElseIf TypeOf Disease(position) Is Covid19 Then
+                FillGrid(yr, 9, "R" + CStr(Disease(position).getFundraise(yr, VaccineCost)))
+            End If
+
 
         Next yr
     End Sub

@@ -81,19 +81,27 @@ Public MustInherit Class Disease
     Public Function DeathTrend(yr As Integer) As Integer
         If yr = 1 Then
             Return 0
-        Else
-            Dim Increase As Integer = (_Year(yr).DeathCount) - (_Year(yr - 1).DeathCount)
+        ElseIf yr = 2 Then
+            Dim Increase As Integer = (_Year(yr).DeathCount - _Year(yr - 1).DeathCount) - (_Year(yr - 1).DeathCount)
             Return CInt(Increase / _Year(yr - 1).DeathCount * 100)
+        Else
+            Dim Increase As Integer = (_Year(yr).DeathCount - (_Year(yr - 1).DeathCount) - (_Year(yr - 1).DeathCount - _Year(yr - 2).DeathCount))
+            Return CInt(Increase / (_Year(yr - 1).DeathCount - _Year(yr - 2).DeathCount) * 100)
         End If
     End Function
 
     Public Function InfectionTrend(yr As Integer) As Integer
         If yr = 1 Then
             Return 0
-        Else
-            Dim Increase As Integer = (_Year(yr).Infections) - (_Year(yr - 1).Infections)
+        ElseIf yr = 2 Then
+            Dim Increase As Integer = (_Year(yr).NewInfections) - (_Year(yr - 1).Infections)
             Return CInt(Increase / _Year(yr - 1).Infections * 100)
+        Else
+            Dim Increase As Integer = (_Year(yr).NewInfections) - (_Year(yr - 1).NewInfections)
+            Return CInt(Increase / _Year(yr - 1).NewInfections * 100)
+
         End If
+
     End Function
 
     Public Overridable Function isInfectionReduced() As Boolean

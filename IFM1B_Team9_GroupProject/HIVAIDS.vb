@@ -23,27 +23,28 @@ Public Class HIVAIDS
         End Set
     End Property
 
+
     ''Methods
     Public Overrides Function isDeathReduced() As Boolean
 
 
         Dim boolReduced As Boolean = True
         Dim counter As Integer = 0
-        Dim Infections As Integer = InfectionTrend(1)
+        Dim deaths As Integer = DeathTrend(1)
 
-        For y As Integer = 2 To MyBase.ArrayLength()
+        For y As Integer = 2 To ArrayLength()
             'Increase in infections
-            If InfectionTrend(y) < Infections Then
+            If DeathTrend(y) < deaths Then
                 counter += 1
-                Infections = InfectionTrend(y)
+                deaths = DeathTrend(y)
                 'Decrease in infections
             Else
                 'Increase trend
                 counter -= 1
             End If
 
-            '
-            If counter > 0 Then 'If counter > 0 then decreasing. If < 0 then increases.
+
+            If counter >= 0 Then 'If counter > 0 then decreasing. If < 0 then increases.
                 boolReduced = True
             Else
                 boolReduced = False
@@ -58,11 +59,10 @@ Public Class HIVAIDS
         Dim counter As Integer = 0
         Dim Infections As Integer = InfectionTrend(1)
 
-        For y As Integer = 2 To MyBase.ArrayLength()
+        For y As Integer = 2 To ArrayLength()
             'Increase in infections
-            If InfectionTrend(y) < Infections Then
+            If InfectionTrend(y) < InfectionTrend(y - 1) Then
                 counter += 1
-                Infections = InfectionTrend(y)
                 'Decrease in infections
             Else
                 'Increase trend
